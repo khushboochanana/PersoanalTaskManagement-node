@@ -1,0 +1,128 @@
+<style>
+  .fileinput-button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4);
+    font-size: 23px;
+    direction: ltr;
+    cursor: pointer;
+  }
+</style>
+<div id="page-wrapper" ng-init="dashboard.init()">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1> {{dashboard.userName}} TODO's
+        <small>A Blank Slate</small>
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <a href="javascript:void(0)" ui-sref="main.home" style="color: #e1edf7">+NewTodo</a>
+          <a href="javascript:void(0)" ui-sref="main.home.todoGroup"
+             style="float: right;color: #e1edf7">+NewTodoGroup</a>
+        </div>
+
+        <div class="panel-body" ui-view>
+          <div>
+            <form name="createTodo" ng-submit="dashboard.addTodo()" invalidate>
+              <label>TODO NAME</label>
+              <input name="task" class="form-control" placeholder="Enter text" ng-model="dashboard.task"
+                     name-unique
+                     required>
+              <br>
+              <label>TODO GROUP</label>
+              <select ng-model='dashboard.todoGroup' ng-options="group._id as group.name for group in dashboard.groups"
+                      required>
+                <option value=''>-- chose TodoGroup --</option>
+              </select>
+              <input type="submit" class="btn btn-success" value="Create"/>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div ng-repeat="group in dashboard.groups" color>
+        <h2>{{group.name}}
+          <a href="javaScript:void(0)" ng-click="dashboard.deleteTodoGroup(group._id)"><img src="../images/delete.png"
+                                                                                            style="width: 20px; height:20px; float: right"></a>
+        </h2>
+
+        <div>Not Done
+          <hr>
+        </div>
+        <ul ng-repeat="item in group.todos ">
+          <li class="list-group-item" ng-show="!(item.completed)==true"
+              style="height: auto" color>
+            <form ng-submit="dashboard.deleteTodo(item._id)">
+              <div ng-class="{strikethrough: item.completed}">
+                <span><input ng-model="item.completed" type="checkbox"
+                             ng-click="dashboard.checkBoxClick(item._id,item.completed)"/>
+                  {{item.task}}
+                  <span style="float:right; margin-right:10px">
+                    <input type="submit" value="DELETE" class="btn btn-xs btn-danger">
+                  </span>
+                </span>
+              </div>
+            </form>
+          </li>
+
+        </ul>
+
+        <div>Done
+          <hr>
+
+        </div>
+
+        <ul ng-repeat="item in group.todos">
+          <li class="list-group-item" ng-show="item.completed==true" style="height: auto" color>
+
+            <form ng-submit="dashboard.deleteTodo(item._id)">
+              <div ng-class="{strikethrough: item.completed}">
+                                <span><input ng-model="item.completed" type="checkbox"
+                                             ng-click="dashboard.checkBoxClick(item._id,item.completed)"/>
+                                    {{item.task}}
+
+                                    <span style="float:right; margin-right:10px">
+                                        <input type="submit" value="DELETE" class="btn btn-xs btn-danger">
+                                    </span>
+                                </span>
+              </div>
+            </form>
+          </li>
+        </ul>
+
+        <form enctype="multipart/form-data" method="post">
+        <input type="hidden" id="groupId{{$index}}"value="{{group._id}}">
+          <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <input type="file" name="file" ng-model="dashboard.file" ng-change="dashboard.addFile()"
+                            multiple  ng-disabled="disabled">
+                </span>
+          <div ng-show="dashboard.attachmentZ.length">
+            <div ng-repeat="file in files.slice(0)">
+              <span>{{file.webkitRelativePath || file.name}}</span>
+              (<span ng-switch="file.size > 1024*1024">
+                <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
+                <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
+            </span>)
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

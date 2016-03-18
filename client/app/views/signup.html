@@ -1,0 +1,25 @@
+<p ng-if="signUp.message">{{signUp.message}}</p>
+
+<div class="panel-body jumbotron " style="padding-left: 47px">
+  <form class="form" method="post">
+    <label class="labelWidth"> Name * </label>
+    <input type="text" name="name" ng-model="signUp.name" required><br>
+    <label class="labelWidth">Email *</label>
+    <input type="text" name="email" ng-model="signUp.email" required><br>
+    <label class="labelWidth">Phone * </label>
+    <input type="text" name="phone" ng-model="signUp.phone" ><br>
+    <label class="labelWidth" >Password * </label>
+
+    <input type="password" name="password" ng-model="signUp.password" required><br>
+    <br>
+    <input type="submit" value="Add" ng-click="signUp.signUp()">
+  </form>
+
+</div>
+<!--<style>-->
+  <!--.page-signUp.ng-leave      { transform-origin: 50% 50%; animation: rotateOutNewspaper .5s both ease-in; }-->
+  <!--.page-signUp.ng-enter      { animation:slideInUp 0.5s both ease-in; }-->
+  <!--.page-signUp.ng-enter-active {-->
+    <!--animation:slideInUp 0.5s both ease-in;-->
+  <!--}-->
+<!--</style>-->

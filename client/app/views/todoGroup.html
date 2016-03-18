@@ -1,0 +1,7 @@
+<form name="createTodo" ng-submit="todoGroup.addTodoGroup()" invalidate>
+  <label>TODO Group Name</label>
+  <input name="task" class="form-control" placeholder="Enter text" ng-model="todoGroup.group.name"
+         name-unique
+         required><br>
+  <input type="submit" class="btn btn-success" value="CreateGroup"/>
+</form>
