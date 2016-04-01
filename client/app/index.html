@@ -43,7 +43,13 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="javascript:void(0)" ng-click="main.home()">Home</a></li>
               <li><a href="/about">About</a></li>
-              <li style="padding-left: 450px"><a href="javascript:void(0)" ng-click="main.logout()">Logout</a></li>
+              <li class="message-info">
+                <a href="javascript:void(0);" data-ng-click="main.showMessenger()">
+                  <span class="glyphicon glyphicon-cloud"></span>
+                  <span class="badge" ></span>
+                </a>
+              </li>
+              <li ><a href="javascript:void(0)" ng-click="main.logout()">Logout</a></li>
             </ul>
 
           </div>
@@ -85,25 +91,29 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/socket.io.js"></script>
         <script src="scripts/directive/color.directive.js"></script>
     <!-- Services -->
         <script src="scripts/services/main.service.js"></script>
-        <script src="scripts/services/signup.service.js"></script>
+        <script src="scripts/services/user.service.js"></script>
         <script src="scripts/services/todo.service.js"></script>
         <script src="scripts/services/todogroup.service.js"></script>
         <script src="scripts/services/upload.service.js"></script>
-    <!-- Controller -->
-        <script src="scripts/controllers/main.js"></script>
+
+    <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/dashboard.js"></script>
         <script src="scripts/controllers/signup.js"></script>
         <script src="scripts/controllers/todo.js"></script>
         <script src="scripts/controllers/todoGroup.js"></script>
         <script src="scripts/controllers/google.js"></script>
-</body>
+        <script src="scripts/controllers/chat.js"></script>
+
+  </body>
 </html>

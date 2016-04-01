@@ -4,9 +4,6 @@ var todoGroupService=require("../services/todoGroup.service.js");
 
 router.post('/',function(req,res) {
     todoGroupService.addTodoGroup(req.body, function (err, data) {
-        console.log(err)
-        console.log(data)
-
         if (err) {
             res.json({status: false});
             return

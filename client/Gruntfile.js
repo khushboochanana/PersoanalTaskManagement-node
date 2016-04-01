@@ -66,16 +66,17 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 8000,
         // Change this to '0.0.0.0' to access the server from outside.
+        socketio: true,
+        open: true,
         hostname: 'localhost',
-        livereload: 35729
+        livereload: 35730
       },
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
-            console.log(connect)
             return [
               modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png$ /index.html [L]']),
               connect.static('.tmp'),

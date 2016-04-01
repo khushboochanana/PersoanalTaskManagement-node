@@ -10,8 +10,8 @@ var Uttils = require("../utils/CommonUtils.js");
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'khushbooc@intelligrape.com',
-        pass: '*ik onkar*'
+        user: 'fragrancechanana@gmail.com',
+        pass: 'igdefault@123'
     },
     logger: true, // log to console
     debug: true // include SMTP traffic in the logs
@@ -35,8 +35,9 @@ router.get('/success', function (req, res) {
         }
         if (user) {
             res.cookie('user', JSON.stringify(user));
-            res.redirect('http://localhost:9000/dashboard');
+            res.redirect('http://localhost:8000/dashboard');
         } else {
+            console.log(req.user)
             var payload = {
                 email: req.user.email,
                 name: req.user.displayName
@@ -57,12 +58,11 @@ router.get('/success', function (req, res) {
                         return
                     }
                     var mailOptions = {
-                        from: '"TodoApp" <k' +
-                        'kcfragrance.9@gmail.com>', // sender address
-                        to: 'khushboo.chanana@tothenew.com', // list of receivers
+                        from: '"TodoApp"', // sender address
+                        to: data.email, // list of receivers
                         subject: 'Hello ', // Subject line
                         text: 'Change Password', // plaintext body
-                        html: '<a href="http://localhost:9000/resetPassword?token=' + token.tokenValue + '&email=' + data.email + '">click here</a>' // html body
+                        html: '<a href="http://localhost:8000/resetPassword?token=' + token.tokenValue + '&email=' + data.email + '">click here</a>' // html body
                     };
                     transporter.sendMail(mailOptions, function (error, info) {
                         if (error) {
@@ -70,7 +70,7 @@ router.get('/success', function (req, res) {
                             return;
                         }
                         res.cookie('user', JSON.stringify(data));
-                        res.redirect('http://localhost:9000/dashboard');
+                        res.redirect('http://localhost:8000/dashboard');
                     });
                 })
             });

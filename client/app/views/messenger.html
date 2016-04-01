@@ -1,0 +1,50 @@
+<div class="modal fade chatBox">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        Lets Chat With Friends
+        <br>
+        <div style="float: left; width: 40%">
+          <div class="modal-header"><b>{{chat.friend.name}}</b></div>
+          <div class="modal-body">
+            <div id="viewport">
+              <div id="viewport-content">
+                <div class="row" ng-repeat="mesg in chat.messages">
+                  <div class="col-md-4" >{{mesg.name}}</div>
+                  <div class="col-lg-8">{{mesg.text}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="width:50% ; float: right ;border: solid">
+          <div class="modal-header"> Users...</div>
+          <div class="modal-body">
+
+            <div class="modal-body" color ng-repeat="user in chat.users" ng-click="chat.sendChatUserDetails(user)">
+              {{user.name}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div id="browser-window">
+
+          <form class="row row-chat" ng-submit="chat.sendMessage()">
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="chat.messageText" placeholder="Type your message" />
+
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </span>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,5 +1,5 @@
 angular.module('clientApp')
-  .controller('ResetPasswordCtrl',['$cookieStore','SignUpService', function ($cookieStore,SignUpService) {
+  .controller('ResetPasswordCtrl',['$cookieStore','UserService', function ($cookieStore,UserService) {
     var _this=this;
 console.log( $cookieStore.get('user'));
     _this.resetPassword=function(){
@@ -25,6 +25,6 @@ console.log( $cookieStore.get('user'));
           };
         }
       };
-      SignUpService.reset({},_successTodo,_failTodo)
+      UserService.reset({},_successTodo,_failTodo)
     }
   }]);

@@ -9,9 +9,9 @@
  */
 (function (jquery, angular) {
   angular.module('clientApp')
-    .controller('DashboardCtrl', ['$state', '$scope','$http', 'TodoGroupService','UploadService', 'TodoService','$stateParams','$cookieStore', function ($state, $scope,$http, TodoGroupService,UploadService, TodoService,$stateParams,$cookieStore) {
+    .controller('DashboardCtrl', ['$state', '$scope', '$http', 'TodoGroupService', 'UploadService', 'TodoService', '$stateParams', '$cookieStore', function ($state, $scope, $http, TodoGroupService, UploadService, TodoService, $stateParams, $cookieStore) {
       var _this = this;
-      console.log("dashboard");
+      _this.listeners = {};
       var _successTodo = function (data) {
         if (data.status) {
           _this.groups.forEach(function (value) {
@@ -75,8 +75,13 @@
           };
         }
       };
+      _this.listeners['showMessenger'] = $scope.$on('showMessenger', function (event, data) {
+        event.stopPropagation();
+        _this.showMessenger = true;
+        _this.friend = data.friend;
+        _this.filter = data.filter
+      });
       _this.init = function () {
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         _this.userName=$cookieStore.get("user").name;
         _this.userId=$cookieStore.get("user")._id;
         TodoGroupService.get({id:_this.userId},_successGetTodoGroups, _failGetTodoGroups);
@@ -138,9 +143,17 @@
      /*     UploadService.upload(data, function (req,res) {
           }, function (err) {
 
-          })*/
+           })*/
 
         })
-      }
+      };
+
+      $scope.$on("$destroy", function () {
+        for (var key in _this.listeners) {
+          if (_this.listeners.hasOwnProperty(key)) {
+            _this.listeners[key]();
+          }
+        }
+      });
     }])
 })(jQuery, angular);

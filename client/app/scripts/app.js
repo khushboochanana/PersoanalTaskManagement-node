@@ -16,7 +16,7 @@ angular
     'ngResource',
     'ngSanitize',
     'ngTouch',
-    'ui.router']).config(['$stateProvider', '$locationProvider','$httpProvider', function ($stateProvider, $locationProvider,$httpProvider) {
+    'ui.router','angularModalService']).config(['$stateProvider', '$locationProvider','$httpProvider', function ($stateProvider, $locationProvider,$httpProvider) {
     $locationProvider.html5Mode({
       enabled: true,
       requireBase: false

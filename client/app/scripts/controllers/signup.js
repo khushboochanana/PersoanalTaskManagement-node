@@ -2,7 +2,7 @@
 
 
 angular.module('clientApp')
-  .controller('SignupCtrl',['SignUpService','$state', function (SignUpService,$state) {
+  .controller('SignupCtrl',['UserService','$state', function (UserService,$state) {
     var _this=this;
     var _successAccountSignup = function (data) {
       if(data&& data.status)
@@ -27,7 +27,7 @@ angular.module('clientApp')
         phone:_this.phone,
         password:_this.password
       };
-      SignUpService.signup(payload, _successAccountSignup, _failAccountSignup);
+      UserService.signup(payload, _successAccountSignup, _failAccountSignup);
     }
 
   }]);

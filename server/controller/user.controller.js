@@ -1,16 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-console.log("USE");
 var userService=require("../services/user.service.js");
 
 /* GET users listing. */
 router.get('/', function (req,res) {
-    userService.find(req.query,function(err,data){
+    userService.findUsers(req.query,function(err,data){
         if(err){
-            return
+            res.json({status:false,message:"Some error occurred"});
         }
-        res.render('list',{users:data,title:"USERS DATA",message:""})
+        res.json({status:true,users:data})
     })
 });
 router.post('/',function(req,res){

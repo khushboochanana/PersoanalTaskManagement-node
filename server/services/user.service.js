@@ -1,8 +1,9 @@
 var UserModel = require("../schema/user.model.js");
-console.log("Hiiiiiiii");
 
-exports.find = (function (query, callback) {
-    UserModel.find(query, callback);
+exports.findUsers = (function (query, callback) {
+    UserModel.find(query, function (err, users) {
+        callback(err, users)
+    });
 
 });
 exports.findByEmail = (function (emaild, callback) {

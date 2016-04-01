@@ -13,6 +13,7 @@ var todo = require('./controller/todo.controller.js');
 var fileUpload = require('./controller/todogroupFileUpload.controller.js');
 var googleRoute = require('./controller/googleLogin.controller.js');
 var todoGroup = require('./controller/todoGroup.controller.js');
+var chatFriend = require('./controller/chatFriend.controller.js');
 var mongoose = require("mongoose");
 var con = mongoose.connect('mongodb://127.0.0.1:27017/Todo');
 var viewEngine = require("ejs-locals");
@@ -66,6 +67,7 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/todo', todo);
 app.use('/todoGroup', todoGroup);
+app.use('/chatFriend', chatFriend);
 app.use('/upload', function (req, res, done) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
